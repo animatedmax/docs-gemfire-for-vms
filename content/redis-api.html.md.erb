@@ -81,10 +81,18 @@ The following  parameters can be passed to configure the service instance:
   </tr>
 </table>
 
-gemfire_for_redis_region_name: S, where S is a string (Defaults to GEMFIRE_FOR_REDIS). 
-Specifies the name of the GemFire for Redis Apps region. 
-gemfire_for_redis_maxmemory_policy: S, where S is a string (default: noeviction). 
-Specifies the eviction policy of the GemFire for Redis Apps region. Valid options are noeviction and allkeys-lru. 
+* `gemfire_for_redis_port: N`: Where `N` is a port number (default: `6379`).
+Specifies the port number where the VMware GemFire server listens for Redis commands.
+
+* `gemfire_for_redis_use_default_region_config: S`: Where `S` is either `true` or `false` (default: true).
+Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to false, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.
+
+* `gemfire_for_redis_region_name: S`: Where `S` is a string (default: "GEMFIRE_FOR_REDIS").
+Specifies the name of the GemFire for Redis Apps region.
+
+* `gemfire_for_redis_maxmemory_policy: S`: Where `S` a string. Valid values are "noeviction" and "allkeys-lru" (default: "noeviction").
+Specifies the eviction policy of the GemFire for Redis Apps region.
+
 gemfire_for_redis_maxmemory_eviction_percent: N, where N is a number (default: 0). 
 Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before entries will be evicted. Must be less than the value set for gemfire_for_redis_maxmemory_deny_commands_percent. 
 gemfire_for_redis_maxmemory_deny_commands_percent: N, where N is a number (defaults to 0, equivalent to no maximum). 
