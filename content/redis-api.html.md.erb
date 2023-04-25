@@ -92,7 +92,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
 1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
 
-    - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When you create a new service, you must add `-c&nbsp;'{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
         You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
@@ -102,7 +102,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
         $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t redis
         ```
 
-    - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When updating an existing service, you must add `-c&nbsp;'{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
         You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
