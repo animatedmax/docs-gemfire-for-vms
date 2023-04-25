@@ -94,16 +94,17 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
     - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see []<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
 
-    For example:
+        For example:
+
         ```
         $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t redis
         ```
 
     - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see []<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
 
         For example:
         ```
@@ -111,7 +112,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
         ```
         > **Note:** Updating the service causes all members of the cluster to restart.
 
-If you migrate from an existing application that uses the Redis tile, you typically must unbind and rebind the app to the Redis service.
+        If you migrate from an existing application that uses the Redis tile, you typically must unbind and rebind the app to the Redis service.
 
 1. If your app is still bound to the Redis service, unbind it:
 
