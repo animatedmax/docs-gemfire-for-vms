@@ -49,6 +49,7 @@ You can pass other paramenters to the `cf create-service` command to further con
 
 The following parameters can be passed to configure the service instance:
 
+<hr>
 <dl>
   <dt><code>gemfire_for_redis_port: N</code></dl>
   <dd>Where <code>N</code> is a port number (default: <code>6379</code>).<br>Specifies the port number where the VMware GemFire server listens for Redis commands.</dd>
@@ -80,7 +81,7 @@ The following parameters can be passed to configure the service instance:
   <dt><code>gemfire_for_redis_write_timeout_seconds: N</code></dt>
   <dd>Where <code>N</code> is a number (default: <code>10</code>).<br>Specifies the timeout (in seconds) for write operations between the VMware GemFire for Redis Apps server and connected clients. If a write operation cannot finish before this timeout is exceeded, an error is returned to the client. While you may be able to prevent timeout exceptions by increasing this value from the default, we recommended that you address the cause of the slow writes instead.</dd>
 </dl>
-
+<hr>
 <p class="note"><strong>Note</strong>: To prevent confusion with the JVM arguments of the redis extension app being passed as advanced configuration, they have been added to the disallow list. If you need to modify these arguments, you must include them when starting a <%=vars.product_full%> service instance.</p>
 
 ## <a id="starting-redis-api"></a> Start a Service Instance with GemFire for Redis Apps
@@ -91,18 +92,22 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
 1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
 
-    - When creating a new service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
-        For example:
+        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see []<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+
+    For example:
         ```
-        $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
+        $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t redis
         ```
 
     - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
+        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see []<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+
         For example:
         ```
-        $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t "redis"
+        $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t "redis"
         ```
         > **Note:** Updating the service causes all members of the cluster to restart.
 
