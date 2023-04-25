@@ -41,7 +41,7 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
   For more information, see [AWS Elasticache Restrictions #189](https://github.com/Grokzen/redis-py-cluster/issues/189) in GitHub.
 
 
-## <a id="service-instance-configuration"></a><%=vars.product_full%> Service Instance Configuration
+## <a id="service-instance-configuration"></a>Service Instance Configuration Parameters
 
 To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created.
 
@@ -94,7 +94,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
     - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
         For example:
 
@@ -104,7 +104,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
     - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [<%=vars.product_full%> Service Instance Configuration](#service-instance-configuration).
+        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
         For example:
         ```
