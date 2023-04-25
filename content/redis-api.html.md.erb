@@ -47,79 +47,41 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
 You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance.
 
-The following  parameters can be passed to configure the service instance:
-
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Usage and Description</th>
-  </tr>
-  <tr>
-    <td><code>gemfire_for_redis_port: N</code></td>
-    <td><code>N</code> is a port number (default: <code>6379</code>).<br>Specifies the port number where the VMware GemFire server listens for Redis commands.</td>
-  </tr>
-  <hr>
-  <tr>
-    <td><code>gemfire_for_redis_use_default_region_config: BOOLEAN</code></td>
-    <td><code>BOOLEAN</code> is either <code>true</code> or <code>false</code> (default: <code>true</code>.<br>Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to <code>false</code>, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.</td>
-  </tr>
-
-  <tr>
-    <td><code></code></td>
-    <td><code></code><br></td>
-  </tr>
-  <tr>
-    <td><code></code></td>
-    <td><code></code><br></td>
-  </tr>
-  <tr>
-    <td><code></code></td>
-    <td><code></code><br></td>
-  </tr>
-  <tr>
-    <td><code></code></td>
-    <td><code></code><br></td>
-  </tr>
-</table>
-
+The following parameters can be passed to configure the service instance:
 
 <dl>
   <dt><code>gemfire_for_redis_port: N</code></dl>
-  <dd><code>N</code> is a port number (default: <code>6379</code>).<br>Specifies the port number where the VMware GemFire server listens for Redis commands.</dd>
+  <dd>Where <code>N</code> is a port number (default: <code>6379</code>).<br>Specifies the port number where the VMware GemFire server listens for Redis commands.</dd>
   <hr />
   <dt><code>gemfire_for_redis_use_default_region_config: B</code></dt>
-  <dd><code>B</code> is a Boolean (default: `true`).<br>
-Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to false, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.</dd>
+  <dd>Where <code>B</code> is a Boolean (default: <code>true</code>).<br>Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to false, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_region_name: S</code></dt>
+  <dd>Where <code>S</code> is a string (default: <code>GEMFIRE_FOR_REDIS</code>).<br>Specifies the name of the GemFire for Redis Apps region.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_policy: S</code></dt>
+  <dd>Where <code>S</code> is a string. Valid values are <code>noeviction</code> and <code>allkeys-lru</code> (default: <code>noeviction</code>).<br>Specifies the eviction policy of the GemFire for Redis Apps region.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_eviction_percent: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>0</code>).<br>Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before entries will be evicted. Must be less than the value set for <code>gemfire_for_redis_maxmemory_deny_commands_percent.</code></dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_deny_commands_percent: N</code></dt>
+  <dd>Where <code>N</code>is a number (default: <code>0</code>, no maximum).<br>Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before commands that write data will be denied. Must be greater than the value set for <code>gemfire_for_redis_maxmemory_eviction_percent</code>.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_notify_keyspace_events: S</code></dt>
+  <dd>Where <code>S</code> is a string (default: an empty string).<br>Specifies the types of keyspace events that the VMware GemFire for Redis Apps server will notify clients of. Each event type is represented by a single letter.<br>For more information about the event types, see <em>--J=-Dgemfire-for-redis-notify-keyspace-events<em> in <a href="https://docs.vmware.com/en/VMware-GemFire-for-Redis-Apps/1.1/gf-for-redis-apps/configuration.html">Configuring VMware GemFire for Redis Apps</a> in the VMware GemFire for Redis Apps product documentation.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_hll_sparse_max_bytes: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>3000</code>).<br>Specifies the maximum number of bytes to use in a HyperLogLog sparse representation. When a HyperLogLog using the sparse representation crosses this limit, it is converted into the dense representation. Decreasing this value, on average, results in lower CPU usage but higher memory usage, because the dense representation is less memory efficient than the sparse representation but performs PFADD in O(1) compared to O(N) for the sparse representation.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_expiration_interval_seconds: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>180</code>).<br>Specifies the interval (in seconds) at which the active expiration check is performed. Every key present in the data store is iterated over and removed if its expiration time has passed. This can be resource intensive if many keys exist. Decreasing this value results in keys being expired and removed closer to their configured expiration time but also increases overall CPU usage.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_write_timeout_seconds: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>10</code>).<br>Specifies the timeout (in seconds) for write operations between the VMware GemFire for Redis Apps server and connected clients. If a write operation cannot finish before this timeout is exceeded, an error is returned to the client. While you may be able to prevent timeout exceptions by increasing this value from the default, we recommended that you address the cause of the slow writes instead.</dd>
 </dl>
 
-
-* **`gemfire_for_redis_port: N`**: Where `N` is a port number (default: `6379`).
-Specifies the port number where the VMware GemFire server listens for Redis commands.
-
-* **`gemfire_for_redis_use_default_region_config: B`**: Where `B` is a Boolean (default: `true`).
-Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to false, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.
-
-* **`gemfire_for_redis_region_name: S`**: Where `S` is a string (default: "GEMFIRE_FOR_REDIS").
-Specifies the name of the GemFire for Redis Apps region.
-
-* `gemfire_for_redis_maxmemory_policy: S`: Where `S` a string. Valid values are "noeviction" and "allkeys-lru" (default: "noeviction").
-Specifies the eviction policy of the GemFire for Redis Apps region.
-
-gemfire_for_redis_maxmemory_eviction_percent: N, where N is a number (default: 0). 
-Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before entries will be evicted. Must be less than the value set for gemfire_for_redis_maxmemory_deny_commands_percent. 
-gemfire_for_redis_maxmemory_deny_commands_percent: N, where N is a number (defaults to 0, equivalent to no maximum). 
-Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before commands which write data will be denied. Must be greater than the value set for gemfire_for_redis_maxmemory_eviction_percent.
-gemfire_for_redis_notify_keyspace_events: S, where S is a string (defaults to empty string). 
-Specifies the types of keyspace events that the VMware GemFire for Redis Apps server will notify clients of. Each event type is represented by a single letter. - More information about the event types on VMware-Tanzu-GemFire-for-Redis-Apps.
-gemfire_for_redis_hll_sparse_max_bytes: N, where N is a number  (default: 3000). 
-The maximum number of bytes to use in a HyperLogLog sparse representation. When a HyperLogLog using the sparse representation crosses this limit, it is converted into the dense representation. Decreasing this value will on average result in lower CPU usage but higher memory usage, as the dense representation is less memory efficient than the sparse representation but performs PFADD in O(1) compared to O(N) for the sparse representation.
-gemfire_for_redis_expiration_interval_seconds: N, where N is a number (default: 180). 
-The interval in seconds at which the active expiration check will be performed. Every key present in the data store will be iterated over and removed if its expiration time has passed, which can be resource intensive if there are many keys present. Decreasing this value will result in keys being expired and removed closer to their configured expiration time but also increase overall CPU usage. 
-gemfire_for_redis_write_timeout_seconds: N, where N is a number  (default: 10). 
-The timeout in seconds for write operations between the VMware GemFire for Redis Apps server and connected clients. If a write operation cannot finish before this timeout is exceeded, an error will be returned to the client. While it may be possible to prevent timeout exceptions by increasing this value from the default, it is recommended to address the cause of the slow writes rather than increasing this value.
-
-
-
+<p class="note"><strong>Note</strong>: To prevent confusion with the JVM arguments of the redis extension app being passed as advanced configuration, they have been added to the disallow list. If you need to modify these arguments, you must include them when starting a <%=vars.product_full%> service instance.</p>
 
 ## <a id="starting-redis-api"></a> Start a Service Instance with GemFire for Redis Apps
 
